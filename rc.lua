@@ -9,6 +9,7 @@ require("naughty")
 require("volume")
 -- Load Debian menu entries
 require("debian.menu")
+require("battery")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -95,6 +96,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
+--
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -178,6 +180,7 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
+        fraxbat,
         volume_widget,
         mytextclock,
         s == 1 and mysystray or nil,
@@ -377,14 +380,14 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-
-
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 function run_once(prg)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
 end
+
+awful.hooks.timer.register(10, function () hook_fraxbat(fraxbat,'BAT0') end)
 
 -- Autostart
 -- run_once("nm-applet")
