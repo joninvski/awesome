@@ -65,7 +65,7 @@ function hook_fraxbat (tbw, bat)
                     fraxbat_est= est
                     fraxbat_now= now
                  end
-                 if stat == 'D' then
+                 if stat == 'B' then
                     est= now*est
                  else
                     est= (full-now)*est
@@ -84,8 +84,6 @@ function hook_fraxbat (tbw, bat)
               fraxbat_est= nil
            end
            charge=':<'..tag..'>'..tostring(math.ceil((100*now)/full))..'%</'..tag..'>'
-           -- Estimate is not working
-           -- charge=':<'..tag..'>'..tostring(math.ceil((100*now)/full))..'%</'..tag..'>'..est
         end
       end
    end

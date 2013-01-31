@@ -250,7 +250,7 @@ do
 
             -- Standard program
             awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-            awful.key({ modkey, "Shift" }, "r", awesome.restart),
+            awful.key({ modkey, "Shift"   }, "r", awesome.restart),
             awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
             awful.key({ modkey, "Control" }, ".",     function () awful.tag.incmwfact( 0.05)    end),
