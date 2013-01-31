@@ -250,7 +250,7 @@ do
 
             -- Standard program
             awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-            awful.key({ modkey, "Control" }, "r", awesome.restart),
+            awful.key({ modkey, "Shift" }, "r", awesome.restart),
             awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
             awful.key({ modkey, "Control" }, ".",     function () awful.tag.incmwfact( 0.05)    end),
@@ -265,7 +265,7 @@ do
             awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
             -- Prompt
-            awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+            awful.key({ modkey, "Control" }, "r",     function () mypromptbox[mouse.screen]:run() end),
 
             -- Volume keys
             awful.key({ }, "XF86AudioRaiseVolume", function ()
