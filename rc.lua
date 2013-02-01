@@ -273,7 +273,10 @@ do
             awful.key({ }, "XF86AudioLowerVolume", function ()
                       awful.util.spawn("amixer set Master 9%-") end),
             awful.key({ }, "XF86AudioMute", function ()
-                      awful.util.spawn("amixer sset Master toggle") end),
+                      awful.util.spawn("amixer sset Headphone toggle") 
+                      awful.util.spawn("amixer sset Speaker toggle") 
+                      awful.util.spawn("amixer sset Master on") 
+                 end),
 
             awful.key({ modkey, "Control" }, "h", awful.tag.viewprev ),
             awful.key({ modkey, "Control" }, "l", awful.tag.viewnext )
@@ -313,7 +316,7 @@ do
                 for i = 1, keynumber do
                     globalkeys = awful.util.table.join(
                         globalkeys,
-                        awful.key({ modkey }, "#" .. i + 9,
+                        awful.key({ modkey, "Control" }, "#" .. i + 9,
                                   function ()
                                       local screen = mouse.screen
                                       if tags[screen][i] then
@@ -412,5 +415,6 @@ do
 
                     -- Autostart
                     -- run_once("nm-applet")
-                    run_once("parcellite")
+                    -- run_once("parcellite")
+                    run_once("gnome-settings-daemon")
                     -- }}}
