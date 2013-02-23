@@ -73,7 +73,7 @@ end
 --{{---| Menu |-------------------------------------------------------------------------------------
 
 mymainmenu = awful.menu({ items = { 
-  {" terminal",             terminal},
+  {"terminal",             terminal},
   {"hibernate",             "sudo pm-hibernate"},
   {"restart",               awesome.restart },
   {"reboot",                "sudo reboot"},
@@ -142,61 +142,52 @@ for s = 1, screen.count() do
 
 --{{---| MEM widget |-------------------------------------------------------------------------------
 
--- memwidget = widget({ type = "textbox" })
--- vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
--- memicon = widget ({type = "imagebox" })
--- memicon.image = image(beautiful.widget_mem)
+memwidget = widget({ type = "textbox" })
+vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE" background="#777E76">$2MB </span></span>', 13)
+memicon = widget ({type = "imagebox" })
+memicon.image = image(beautiful.widget_mem)
 
 --{{---| CPU / sensors widget |---------------------------------------------------------------------
 
--- cpuwidget = widget({ type = "textbox" })
--- vicious.register(cpuwidget, vicious.widgets.cpu,
--- '<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$2% <span color="#888888">·</span> $3% </span></span>', 3)
--- cpuicon = widget ({type = "imagebox" })
--- cpuicon.image = image(beautiful.widget_cpu)
+cpuwidget = widget({ type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$2% <span color="#888888">·</span> $3% </span></span>', 3)
+cpuicon = widget ({type = "imagebox" })
+cpuicon.image = image(beautiful.widget_cpu)
 -- sensors = widget({ type = "textbox" })
 -- vicious.register(sensors, vicious.widgets.sensors)
--- tempicon = widget ({type = "imagebox" })
--- tempicon.image = image(beautiful.widget_temp)
--- blingbling.popups.htop(cpuwidget,
--- { title_color = beautiful.notify_font_color_1, 
--- user_color = beautiful.notify_font_color_2, 
--- root_color = beautiful.notify_font_color_3, 
--- terminal   = "terminal --geometry=130x56-10+26"})
+tempicon = widget ({type = "imagebox" })
+tempicon.image = image(beautiful.widget_temp)
 
 --{{---| FS's widget / udisks-glue menu |-----------------------------------------------------------
 
 -- fswidget = widget({ type = "textbox" })
 -- vicious.register(fswidget, vicious.widgets.fs,
--- '<span background="#D0785D" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE">${/mnt/storage avail_gb}GB </span></span>', 8)
--- udisks_glue = blingbling.udisks_glue.new(beautiful.widget_hdd)
--- udisks_glue:set_mount_icon(beautiful.accept)
--- udisks_glue:set_umount_icon(beautiful.cancel)
--- udisks_glue:set_detach_icon(beautiful.cancel)
--- udisks_glue:set_Usb_icon(beautiful.usb)
--- udisks_glue:set_Cdrom_icon(beautiful.cdrom)
--- awful.widget.layout.margins[udisks_glue.widget] = { top = 0}
--- udisks_glue.widget.resize = false
+-- '<span background="#D0785D" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE">${/home avail_gb}GB </span></span>', 8)
 
 --{{---| Battery widget |---------------------------------------------------------------------------  
 
--- baticon = widget ({type = "imagebox" })
--- baticon.image = image(beautiful.widget_battery)
--- batwidget = widget({ type = "textbox" })
--- vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF" background="#92B0A0">$1$2% </span></span>', 1, "BAT0" )
+baticon = widget ({type = "imagebox" })
+baticon.image = image(beautiful.widget_battery)
+batwidget = widget({ type = "textbox" })
+vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF" background="#92B0A0">$1$2% </span></span>', 1, "BAT0" )
 
 --{{---| Net widget |-------------------------------------------------------------------------------
 
--- netwidget = widget({ type = "textbox" })
--- vicious.register(netwidget, 
--- vicious.widgets.net,
--- '<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${eth0 down_kb} ↓↑ ${eth0 up_kb}</span> </span>', 3)
--- neticon = widget ({type = "imagebox" })
--- neticon.image = image(beautiful.widget_net)
--- netwidget:buttons(awful.util.table.join(awful.button({ }, 1,
--- function () awful.util.spawn_with_shell(iptraf) end)))
+netwidget = widget({ type = "textbox" })
+vicious.register(netwidget, 
+vicious.widgets.net,
+'<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${eth0 down_kb} ↓↑ ${eth0 up_kb}</span> </span>', 3)
+neticon = widget ({type = "imagebox" })
+neticon.image = image(beautiful.widget_net)
+netwidget:buttons(awful.util.table.join(awful.button({ }, 1,
+function () awful.util.spawn_with_shell(iptraf) end)))
+
+--{{---| Text Clock |-----------------------------------------------------------------------------
+--
+mytextclock = awful.widget.textclock({ align = "right" })
 
 --{{---| Binary Clock |-----------------------------------------------------------------------------
+
 
 binaryclock = {}
 binaryclock.widget = widget({type = "imagebox"})
@@ -314,28 +305,29 @@ mywibox[s] = awful.wibox({ position = "top", screen = s, height = "12" })
 
 mywibox[s].widgets = {
    { mylauncher, mytaglist[s], mypromptbox[s], layout = awful.widget.layout.horizontal.leftright },
+     mytextclock,
      mylayoutbox[s],
      arr1,
      spr3f,
      binaryclock.widget,
      spr3f, 
      arr2, 
-     -- netwidget,
+     netwidget,
      neticon,
      arr3,
-     -- batwidget,
+     batwidget,
      baticon,
      arr4, 
      fswidget,
      -- udisks_glue.widget,
      arr5,
-     sensors,
-     tempicon,
+     -- sensors,
+     -- tempicon,
      arr6,
-     -- cpuwidget,
+     cpuwidget,
      cpuicon,
      arr7,
-     -- memwidget,
+     memwidget,
      memicon,
      arr8,
      arr9,
