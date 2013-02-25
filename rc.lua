@@ -417,4 +417,5 @@ do
                     -- run_once("nm-applet")
                     -- run_once("parcellite")
                     run_once("gnome-settings-daemon")
+                    run_once("awsetbg -f ~/.config/awesome/wallpaper.png")
                     -- }}}
