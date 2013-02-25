@@ -41,6 +41,10 @@ terminal      = "roxterm"
 --{{---| Couth Alsa volume applet |-----------------------------------------------------------------
 
 couth.CONFIG.ALSA_CONTROLS = { 'Master', 'PCM' }
+couth.CONFIG.ALSA_CONTROLS = { 'Master', 'PCM' }
+couth.CONFIG.NOTIFIER_FONT = 'mono 10'
+couth.CONFIG.NOTIFIER_POSITION = 'top_right'
+couth.CONFIG.NOTIFIER_TIMEOUT = 1
 
 --{{---| Table of layouts |-------------------------------------------------------------------------
 
