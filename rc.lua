@@ -147,16 +147,16 @@ for s = 1, screen.count() do
 --{{---| MEM widget |-------------------------------------------------------------------------------
 
 memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem, '<span background="#777E76" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE" background="#777E76">$1% ($2MB/$3MB) </span></span>', 13)
-memicon = widget ({type = "imagebox" })
-memicon.image = image(beautiful.widget_mem)
+vicious.register(memwidget, vicious.widgets.mem, '<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD" background="#000000">Mem: $1% </span></span>', 13)
+-- memicon = widget ({type = "imagebox" })
+-- memicon.image = image(beautiful.widget_mem)
 
 --{{---| CPU / sensors widget |---------------------------------------------------------------------
 
 cpuwidget = widget({ type = "textbox" })
-vicious.register(cpuwidget, vicious.widgets.cpu, '<span background="#4B696D" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">$2% </span></span>', 3)
-cpuicon = widget ({type = "imagebox" })
-cpuicon.image = image(beautiful.widget_cpu)
+vicious.register(cpuwidget, vicious.widgets.cpu, '<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">CPU: $2% </span></span>', 3)
+-- cpuicon = widget ({type = "imagebox" })
+-- cpuicon.image = image(beautiful.widget_cpu)
 -- sensors = widget({ type = "textbox" })
 -- vicious.register(sensors, vicious.widgets.sensors)
 tempicon = widget ({type = "imagebox" })
@@ -170,19 +170,19 @@ tempicon.image = image(beautiful.widget_temp)
 
 --{{---| Battery widget |---------------------------------------------------------------------------  
 
-baticon = widget ({type = "imagebox" })
-baticon.image = image(beautiful.widget_battery)
+-- baticon = widget ({type = "imagebox" })
+-- baticon.image = image(beautiful.widget_battery)
 batwidget = widget({ type = "textbox" })
-vicious.register( batwidget, vicious.widgets.bat, '<span background="#92B0A0" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF" background="#92B0A0">$1$2% </span></span>', 1, "BAT0" )
+vicious.register( batwidget, vicious.widgets.bat, '<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD" background="#000000">Bat$1$2% </span></span>', 1, "BAT0" )
 
 --{{---| Net widget |-------------------------------------------------------------------------------
 
 netwidget = widget({ type = "textbox" })
 vicious.register(netwidget, 
 vicious.widgets.net,
-'<span background="#C2C2A4" font="Terminus 12"> <span font="Terminus 9" color="#FFFFFF">${eth2 down_kb} ↓↑ ${eth2 up_kb}</span> </span>', 3)
-neticon = widget ({type = "imagebox" })
-neticon.image = image(beautiful.widget_net)
+'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${eth2 down_kb}  ${eth2 up_kb}</span> </span>', 3)
+-- neticon = widget ({type = "imagebox" })
+-- neticon.image = image(beautiful.widget_net)
 netwidget:buttons(awful.util.table.join(awful.button({ }, 1,
 function () awful.util.spawn_with_shell(iptraf) end)))
 
@@ -198,9 +198,9 @@ binaryclock.widget = widget({type = "imagebox"})
 binaryclock.w = 42  
 binaryclock.h = 16  
 binaryclock.show_sec = true 
-binaryclock.color_active = beautiful.binclock_fga
-binaryclock.color_bg = beautiful.binclock_bg
-binaryclock.color_inactive = beautiful.binclock_fgi
+binaryclock.color_active = "#EEEEEE"
+binaryclock.color_bg = "#000000"
+binaryclock.color_inactive = "#111111"
 binaryclock.dotsize = math.floor(binaryclock.h / 5)
 binaryclock.step = math.floor(binaryclock.dotsize / 3)
 binaryclock.widget.image = image.argb32(binaryclock.w, binaryclock.h, nil) 
@@ -280,7 +280,7 @@ spr.text = ' '
 sprd = widget({ type = "textbox" })
 sprd.text = '<span background="#313131" font="Terminus 12"> </span>'
 spr3f = widget({ type = "textbox" })
-spr3f.text = '<span background="#777e76" font="Terminus 12"> </span>'
+spr3f.text = '<span background="#000000" font="Terminus 12"> </span>'
 arr1 = widget ({type = "imagebox" })
 arr1.image = image(beautiful.arr1)
 arr2 = widget ({type = "imagebox" })
@@ -309,34 +309,35 @@ mywibox[s] = awful.wibox({ position = "top", screen = s, height = "12" })
 
 mywibox[s].widgets = {
    { mylauncher, mytaglist[s], mypromptbox[s], layout = awful.widget.layout.horizontal.leftright },
-     mytextclock,
      mylayoutbox[s],
-     arr1,
+     mytextclock,
+     s == 1 and mysystray, spr or nil, 
+     -- arr1,
      spr3f,
      binaryclock.widget,
      spr3f, 
-     arr2, 
+     -- arr2, 
      netwidget,
-     neticon,
-     arr3,
+     -- neticon,
+     -- arr3,
      batwidget,
      baticon,
-     arr4, 
+     -- arr4, 
      fswidget,
      -- udisks_glue.widget,
-     arr5,
+     -- arr5,
      -- sensors,
      -- tempicon,
-     arr6,
+     -- arr6,
      cpuwidget,
-     cpuicon,
-     arr7,
+     -- cpuicon,
+     -- arr7,
      memwidget,
-     memicon,
-     arr8,
-     arr9,
+     -- memicon,
+     -- arr8,
+     -- arr9,
      spr,
-     s == 1 and mysystray, spr or nil, mytasklist[s], 
+     mytasklist[s], 
      layout = awful.widget.layout.horizontal.rightleft } end
 
 --{{---| Mouse bindings |---------------------------------------------------------------------------
