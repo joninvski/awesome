@@ -442,7 +442,7 @@ awful.rules.rules = {
 
     { rule = { role  = "browser"         } , properties = { tag = tags[1][3] }  } ,
 
-    { rule = { class = "roxterm"         } , properties = { tag = tags[1][2] }  } ,
+    { rule = { class = "Roxterm"         } , properties = { tag = tags[1][2] }  } ,
 }
 
 
