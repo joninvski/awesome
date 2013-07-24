@@ -437,9 +437,14 @@ awful.rules.rules = {
     focus = true,
     keys = clientkeys,
     buttons = clientbuttons } },
-    { rule = { class = "gimp" },
-    properties = { floating = true } },
+
+    { rule = { class = "gimp"            } , properties = { floating = true  }  } ,
+
+    { rule = { role  = "browser"         } , properties = { tag = tags[1][3] }  } ,
+
+    { rule = { class = "roxterm"         } , properties = { tag = tags[1][2] }  } ,
 }
+
 
 --{{---| Signals |----------------------------------------------------------------------------------
 
