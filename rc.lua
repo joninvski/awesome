@@ -76,7 +76,7 @@ end
 
 --{{---| Menu |-------------------------------------------------------------------------------------
 
-mymainmenu = awful.menu({ items = { 
+mymainmenu = awful.menu({ items = {
   {"terminal",             terminal},
   {"hibernate",             "sudo pm-hibernate"},
   {"restart",               awesome.restart },
@@ -168,7 +168,7 @@ tempicon.image = image(beautiful.widget_temp)
 -- vicious.register(fswidget, vicious.widgets.fs,
 -- '<span background="#D0785D" font="Terminus 12"> <span font="Terminus 9" color="#EEEEEE">${/home avail_gb}GB </span></span>', 8)
 
---{{---| Battery widget |---------------------------------------------------------------------------  
+--{{---| Battery widget |---------------------------------------------------------------------------
 
 -- baticon = widget ({type = "imagebox" })
 -- baticon.image = image(beautiful.widget_battery)
@@ -178,9 +178,9 @@ vicious.register( batwidget, vicious.widgets.bat, '<span background="#000000" fo
 --{{---| Net widget |-------------------------------------------------------------------------------
 
 netwidget = widget({ type = "textbox" })
-vicious.register(netwidget, 
+vicious.register(netwidget,
 vicious.widgets.net,
-'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${eth2 down_kb}  ${eth2 up_kb}</span> </span>', 3)
+'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${wlan0 down_kb}  ${wlan0 up_kb}</span> </span>', 3)
 -- neticon = widget ({type = "imagebox" })
 -- neticon.image = image(beautiful.widget_net)
 netwidget:buttons(awful.util.table.join(awful.button({ }, 1,
@@ -195,17 +195,17 @@ mytextclock = awful.widget.textclock({ align = "right" })
 
 binaryclock = {}
 binaryclock.widget = widget({type = "imagebox"})
-binaryclock.w = 42  
-binaryclock.h = 16  
-binaryclock.show_sec = true 
+binaryclock.w = 42
+binaryclock.h = 16
+binaryclock.show_sec = true
 binaryclock.color_active = "#EEEEEE"
 binaryclock.color_bg = "#000000"
 binaryclock.color_inactive = "#111111"
 binaryclock.dotsize = math.floor(binaryclock.h / 5)
 binaryclock.step = math.floor(binaryclock.dotsize / 3)
-binaryclock.widget.image = image.argb32(binaryclock.w, binaryclock.h, nil) 
-if (binaryclock.show_sec) then binaryclock.timeout = 1 else binaryclock.timeout = 20 end 
-binaryclock.DEC_BIN = function(IN) 
+binaryclock.widget.image = image.argb32(binaryclock.w, binaryclock.h, nil)
+if (binaryclock.show_sec) then binaryclock.timeout = 1 else binaryclock.timeout = 20 end
+binaryclock.DEC_BIN = function(IN)
 local B,K,OUT,I,D=2,"01","",0
 while IN>0 do
 I=I+1
@@ -214,21 +214,21 @@ OUT=string.sub(K,D,D)..OUT
 end
 return OUT
 end
-binaryclock.paintdot = function(val,shift,limit) 
+binaryclock.paintdot = function(val,shift,limit)
 local binval = binaryclock.DEC_BIN(val)
 local l = string.len(binval)
-local height = 0 
+local height = 0
 if (l < limit) then
 for i=1,limit - l do binval = "0" .. binval end
 end
 for i=0,limit-1 do
 if (string.sub(binval,limit-i,limit-i) == "1") then
 binaryclock.widget.image:draw_rectangle(shift,
-binaryclock.h - binaryclock.dotsize - height, 
+binaryclock.h - binaryclock.dotsize - height,
 binaryclock.dotsize, binaryclock.dotsize, true, binaryclock.color_active)
 else
 binaryclock.widget.image:draw_rectangle(shift,
-binaryclock.h - binaryclock.dotsize - height, 
+binaryclock.h - binaryclock.dotsize - height,
 binaryclock.dotsize,binaryclock.dotsize, true, binaryclock.color_inactive)
 end
 height = height + binaryclock.dotsize + binaryclock.step
@@ -269,7 +269,7 @@ end)
 binarytimer:start()
 
 -- binaryclock.widget:buttons(awful.util.table.join(
---   awful.button({ }, 1, function () 
+--   awful.button({ }, 1, function ()
 --   end)
 -- ))
 
@@ -311,18 +311,18 @@ mywibox[s].widgets = {
    { mylauncher, mytaglist[s], mypromptbox[s], layout = awful.widget.layout.horizontal.leftright },
      mylayoutbox[s],
      mytextclock,
-     s == 1 and mysystray, spr or nil, 
+     s == 1 and mysystray, spr or nil,
      -- arr1,
      spr3f,
      binaryclock.widget,
-     spr3f, 
-     -- arr2, 
+     spr3f,
+     -- arr2,
      netwidget,
      -- neticon,
      -- arr3,
      batwidget,
      baticon,
-     -- arr4, 
+     -- arr4,
      fswidget,
      -- udisks_glue.widget,
      -- arr5,
@@ -337,7 +337,7 @@ mywibox[s].widgets = {
      -- arr8,
      -- arr9,
      spr,
-     mytasklist[s], 
+     mytasklist[s],
      layout = awful.widget.layout.horizontal.rightleft } end
 
 --{{---| Mouse bindings |---------------------------------------------------------------------------
@@ -414,7 +414,7 @@ awful.key({ modkey }, "#" .. i + 9, function () local screen = mouse.screen
 if tags[screen][i] then awful.tag.viewonly(tags[screen][i]) end end),
 awful.key({ modkey, "Control" }, "#" .. i + 9, function () local screen = mouse.screen
 if tags[screen][i] then awful.tag.viewtoggle(tags[screen][i]) end end),
-awful.key({ modkey, "Shift" }, "#" .. i + 9, function () if client.focus and 
+awful.key({ modkey, "Shift" }, "#" .. i + 9, function () if client.focus and
 tags[client.focus.screen][i] then awful.client.movetotag(tags[client.focus.screen][i]) end end),
 awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function () if client.focus and
 tags[client.focus.screen][i] then awful.client.toggletag(tags[client.focus.screen][i]) end end)) end
