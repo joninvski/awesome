@@ -180,10 +180,19 @@ vicious.register( batwidget, vicious.widgets.bat, '<span background="#000000" fo
 netwidget = widget({ type = "textbox" })
 vicious.register(netwidget,
 vicious.widgets.net,
-'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${wlan0 down_kb}  ${wlan0 up_kb}</span> </span>', 3)
+'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${wlan0 down_kb} ${wlan0 up_kb}</span> </span>', 3)
 -- neticon = widget ({type = "imagebox" })
 -- neticon.image = image(beautiful.widget_net)
 netwidget:buttons(awful.util.table.join(awful.button({ }, 1,
+function () awful.util.spawn_with_shell(iptraf) end)))
+
+netwidget_ether = widget({ type = "textbox" })
+vicious.register(netwidget_ether,
+vicious.widgets.net,
+'<span background="#000000" font="Terminus 12"> <span font="Terminus 9" color="#DDDDDD">↓↑ ${eth0 down_kb} ${eth0 up_kb}</span> </span>', 3)
+-- neticon = widget ({type = "imagebox" })
+-- neticon.image = image(beautiful.widget_net)
+netwidget_ether:buttons(awful.util.table.join(awful.button({ }, 1,
 function () awful.util.spawn_with_shell(iptraf) end)))
 
 --{{---| Text Clock |-----------------------------------------------------------------------------
@@ -318,6 +327,7 @@ mywibox[s].widgets = {
      spr3f,
      -- arr2,
      netwidget,
+     netwidget_ether,
      -- neticon,
      -- arr3,
      batwidget,
@@ -472,10 +482,11 @@ function run_oncewa(prg) if not prg then do return nil end end
 
 --{{--| Autostart |---------------------------------------------------------------------------------
 
+--run_once("gnome-session")
+run_once("unity-settings-daemon")
 run_once("awsetbg -f ~/.config/awesome/wallpaper.png")
 -- os.execute("setxkbmap -layout 'us,ru' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:ralt' &")
 -- run_once("udisks-glue")
--- os.execute("sudo /etc/init.d/dcron start &")
 -- run_once("kbdd")
 -- run_once("qlipper")
 
