@@ -378,7 +378,7 @@ globalkeys = awful.util.table.join(
 
 --{{---| Terminals, shells und multiplexors |---------------------------------------------------------\-\\
                                                                                                         --
-awful.key({ modkey,           }, "Return",   function () awful.util.spawn(terminal) end),               --
+awful.key({ modkey, "Control" }, "Return",   function () awful.util.spawn(terminal) end),               --
                                                                                                         --
 --{{--------------------------------------------------------------------------------------------------/-//
 
@@ -402,6 +402,8 @@ awful.key({                   } , "XF86AudioPlay",              function () awfu
 awful.key({                   } , "XF86AudioStop",              function () awful.util.spawn_with_shell("ncmpcpp stop") end),
 awful.key({                   } , "XF86AudioPrev",              function () awful.util.spawn_with_shell("ncmpcpp prev") end),
 awful.key({                   } , "XF86AudioNext",              function () awful.util.spawn_with_shell("ncmpcpp next") end),
+awful.key({ modkey, "Control" } , "9",                          function () couth.notifier:notify(couth.alsa:setVolume('Master','3dB-')) end),
+awful.key({ modkey, "Control" } , "0",                          function () couth.notifier:notify(couth.alsa:setVolume('Master','3dB+')) end),
 awful.key({                   } , "XF86AudioLowerVolume",       function () couth.notifier:notify(couth.alsa:setVolume('Master','3dB-')) end),
 awful.key({                   } , "XF86AudioRaiseVolume",       function () couth.notifier:notify(couth.alsa:setVolume('Master','3dB+')) end),
 awful.key({                   } , "XF86AudioMute",              function () couth.notifier:notify(couth.alsa:setVolume('Master','toggle')) end)
